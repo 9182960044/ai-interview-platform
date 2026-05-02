@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Interview Platform</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #00c6ff;
+            color: black;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0072ff;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .question {
+            text-align: left;
+            margin-top: 15px;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>AI Interview Preparation</h1>
+
+    <!-- Role Selection -->
+    <form method="POST">
+        <label>Select Role:</label>
+        <select name="role">
+            <option value="python">Python Developer</option>
+            <option value="java">Java Developer</option>
+        </select>
+        <button type="submit">Start Interview</button>
+    </form>
+
+    {% if questions %}
+    <!-- Questions Section -->
+    <form action="/evaluate" method="POST">
+        <input type="hidden" name="role" value="{{ role }}">
+
+        {% for q in questions %}
+            <div class="question">
+                <p><strong>{{ q.q }}</strong></p>
+                <textarea name="answer{{ loop.index0 }}" placeholder="Type your answer..."></textarea>
+            </div>
+        {% endfor %}
+
+        <button type="submit">Submit Answers</button>
+    </form>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+ai-interview-platform/
+│
+├── app.py
+├── interview.db
+├── requirements.txt
+│
+├── templates/
+│   ├── login.html
+│   ├── register.html
+│   ├── index.html
+│   ├── result.html
+│   └── admin.html
+│
+├── static/
+│
+└── uploads/
